@@ -1,4 +1,4 @@
-const CACHE_NAME = "daily-success-cache-v2";
+const CACHE_NAME = "daily-success-cache-v4";
 
 const FILES_TO_CACHE = [
   "./",
@@ -10,6 +10,8 @@ const FILES_TO_CACHE = [
 ];
 
 self.addEventListener("install", function (event) {
+  self.skipWaiting();
+
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
       return cache.addAll(FILES_TO_CACHE);
@@ -27,14 +29,20 @@ self.addEventListener("activate", function (event) {
           }
         })
       );
+    }).then(function () {
+      return self.clients.claim();
     })
   );
 });
 
 self.addEventListener("fetch", function (event) {
   event.respondWith(
-    caches.match(event.request).then(function (cachedResponse) {
-      return cachedResponse || fetch(event.request);
-    })
+    fetch(event.request)
+      .then(function (networkResponse) {
+        return networkResponse;
+      })
+      .catch(function () {
+        return caches.match(event.request);
+      })
   );
 });
