@@ -1,0 +1,16 @@
+{
+  "name": "Daily Success",
+  "short_name": "Success",
+  "description": "A daily checklist app that tracks your success percentage.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eff6ff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
