@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Daily Success</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" />
+
+  <meta name="theme-color" content="#2563eb" />
+</head>
+<body>
+  <div class="phone-shell">
+    <div class="app">
+      <header class="top-header">
+        <div>
+          <p class="eyebrow">Daily tracker</p>
+          <h1>Daily Success</h1>
+        </div>
+
+        <div class="today-badge">
+          <span id="miniDay">Today</span>
+        </div>
+      </header>
+
+      <section class="date-card">
+        <p class="label">Selected day</p>
+        <h2 id="currentDate">Loading...</h2>
+
+        <div class="nav-buttons">
+          <button id="prevDayBtn">← Previous</button>
+          <button id="todayBtn">Today</button>
+          <button id="nextDayBtn">Next →</button>
+        </div>
+      </section>
+
+      <div id="dayScroll" class="day-scroll"></div>
+
+      <section class="score-card">
+        <p class="label">Day score</p>
+        <div class="score-row">
+          <div>
+            <div class="score-number" id="score">0%</div>
+            <div class="score-text" id="message">Start checking things off.</div>
+          </div>
+
+          <div class="circle-score">
+            <span id="completedCount">0/0</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="weekly-card">
+        <div class="section-title-row">
+          <h3>Weekly summary</h3>
+          <p id="weeklyAverage">Avg: 0%</p>
+        </div>
+
+        <div id="weeklySummary" class="weekly-summary"></div>
+      </section>
+
+      <section class="add-task-card">
+        <h3>Add a task</h3>
+
+        <input
+          type="text"
+          id="taskInput"
+          placeholder="Example: Work out, study, clean room"
+        />
+
+        <div class="add-buttons">
+          <button id="addDailyTaskBtn">Daily Task</button>
+          <button id="addOneDayTaskBtn">One-Day Task</button>
+        </div>
+
+        <p class="hint">
+          Daily tasks repeat every day. One-day tasks only show up on the selected day.
+        </p>
+      </section>
+
+      <section class="section">
+        <div class="section-title-row">
+          <h3>Daily repeating tasks</h3>
+        </div>
+        <div id="dailyTaskList" class="task-list"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-title-row">
+          <h3>Tasks for this day only</h3>
+        </div>
+        <div id="oneDayTaskList" class="task-list"></div>
+      </section>
+
+      <div class="bottom-buttons">
+        <button id="resetBtn" class="secondary-btn">Reset This Day</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top, #dbeafe 0%, transparent 35%),
+    linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
+  color: #111827;
+  min-height: 100vh;
+  padding: 20px 12px;
+}
+
+.phone-shell {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.app {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 30px;
+  padding: 22px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.16);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.top-header h1 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.today-badge {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.date-card,
+.score-card,
+.weekly-card,
+.add-task-card,
+.section {
+  background: #f8fbff;
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 800;
+}
+
+#currentDate {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.nav-buttons,
+.add-buttons,
+.bottom-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
+  transition: transform 0.08s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.92;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+#prevDayBtn,
+#todayBtn,
+#nextDayBtn,
+#addDailyTaskBtn,
+#addOneDayTaskBtn {
+  flex: 1;
+  background: #2563eb;
+  color: white;
+}
+
+.secondary-btn {
+  width: 100%;
+  background: #111827;
+  color: white;
+}
+
+.day-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 2px 2px 14px;
+  margin-bottom: 4px;
+}
+
+.day-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.day-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.day-pill {
+  min-width: 82px;
+  background: white;
+  border: 1px solid #dbe5f0;
+  border-radius: 18px;
+  padding: 11px 8px;
+  text-align: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
+}
+
+.day-pill .day-top {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.day-pill .day-bottom {
+  font-size: 15px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.day-pill.active {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.day-pill.active .day-top,
+.day-pill.active .day-bottom {
+  color: white;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.score-number {
+  font-size: 52px;
+  font-weight: 900;
+  color: #111827;
+  line-height: 1;
+}
+
+.score-text {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 15px;
+}
+
+.circle-score {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: white;
+  border: 8px solid #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e40af;
+  font-size: 16px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.section-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title-row h3,
+.add-task-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.section-title-row p {
+  margin: 0 0 12px;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.weekly-summary {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 7px;
+}
+
+.week-day {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 9px 5px;
+  text-align: center;
+}
+
+.week-day.active {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.week-name {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.week-bar {
+  height: 54px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  margin: 0 auto 6px;
+  width: 12px;
+}
+
+.week-fill {
+  width: 100%;
+  background: #2563eb;
+  border-radius: 999px;
+}
+
+.week-percent {
+  font-size: 11px;
+  font-weight: 900;
+}
+
+#taskInput {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 14px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+}
+
+#taskInput:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.hint {
+  margin: 12px 0 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 13px 14px;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.04);
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.task-left input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #2563eb;
+}
+
+.task-text {
+  font-size: 15px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: #64748b;
+}
+
+.delete-btn {
+  background: #fee2e2;
+  color: #b91c1c;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.empty-text {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+@media (max-width: 390px) {
+  .nav-buttons,
+  .add-buttons {
+    flex-direction: column;
+  }
+
+  .score-row {
+    align-items: flex-start;
+  }
+
+  .circle-score {
+    width: 72px;
+    height: 72px;
+    font-size: 14px;
+  }
+
+  .weekly-summary {
+    gap: 5px;
+  }
+}
