@@ -6,7 +6,7 @@
 
   <title>Daily Success</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=13" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icon.svg" />
 
@@ -26,82 +26,308 @@
         </div>
       </header>
 
-      <section class="date-card">
-        <p class="label">Selected day</p>
-        <h2 id="currentDate">Loading...</h2>
+      <main id="todayScreen" class="app-screen">
+        <section class="date-card">
+          <p class="label">Selected day</p>
+          <h2 id="currentDate">Loading...</h2>
 
-        <div class="nav-buttons">
-          <button id="prevDayBtn">← Previous</button>
-          <button id="todayBtn">Today</button>
-          <button id="nextDayBtn">Next →</button>
-        </div>
-      </section>
-
-      <div id="dayScroll" class="day-scroll"></div>
-
-      <section class="score-card">
-        <p class="label">Day score</p>
-        <div class="score-row">
-          <div>
-            <div class="score-number" id="score">0%</div>
-            <div class="score-text" id="message">Start checking things off.</div>
+          <div class="nav-buttons">
+            <button id="prevDayBtn">← Previous</button>
+            <button id="todayBtn">Today</button>
+            <button id="nextDayBtn">Next →</button>
           </div>
 
-          <div class="circle-score">
-            <span id="completedCount">0/0</span>
+          <button id="openCalendarBtn" class="primary-wide-btn">Open Calendar</button>
+        </section>
+
+        <div id="dayScroll" class="day-scroll"></div>
+
+        <section class="score-card">
+          <p class="label">Day score</p>
+          <div class="score-row">
+            <div>
+              <div class="score-number" id="score">0%</div>
+              <div class="score-text" id="message">Start checking things off.</div>
+            </div>
+
+            <div class="circle-score">
+              <span id="completedCount">0/0</span>
+            </div>
           </div>
+        </section>
+
+        <section class="streak-card">
+  <div class="section-title-row">
+    <div>
+      <p class="label">Streaks</p>
+      <h3>Success streak</h3>
+    </div>
+    <div class="goal-pill" id="successGoalLabel">Goal: 75%</div>
+  </div>
+
+  <div class="streak-grid">
+    <div class="streak-box">
+      <p>Current streak</p>
+      <h2 id="currentStreak">0 days</h2>
+    </div>
+
+    <div class="streak-box">
+      <p>Best streak</p>
+      <h2 id="bestStreak">0 days</h2>
+    </div>
+  </div>
+</section>
+
+        <section class="add-task-card">
+          <div class="section-title-row">
+            <h3>Tasks</h3>
+            <button id="toggleTaskFormBtn" class="small-btn">+ Task</button>
+          </div>
+
+          <div id="taskForm" class="task-form hidden">
+            <input
+              type="text"
+              id="taskInput"
+              placeholder="Example: Work out, study, clean room"
+            />
+
+            <select id="taskRepeatSelect">
+              <option value="once">Never repeat / one-time task</option>
+              <option value="daily">Every day</option>
+              <option value="weekly">Weekly</option>
+              <option value="custom">Custom days of week</option>
+            </select>
+
+            <div id="taskDateField">
+              <p class="hint">Choose the day this one-time task should appear.</p>
+              <input type="date" id="taskDateInput" />
+            </div>
+
+            <div id="weeklyField" class="hidden">
+              <p class="hint">Choose which weekday this task repeats on.</p>
+              <select id="weeklyDaySelect">
+                <option value="0">Sunday</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+              </select>
+            </div>
+
+            <div id="customDaysField" class="hidden">
+              <p class="hint">Choose the days this task should repeat.</p>
+
+              <div class="weekday-options">
+                <label><input type="checkbox" value="0" /> Sun</label>
+                <label><input type="checkbox" value="1" /> Mon</label>
+                <label><input type="checkbox" value="2" /> Tue</label>
+                <label><input type="checkbox" value="3" /> Wed</label>
+                <label><input type="checkbox" value="4" /> Thu</label>
+                <label><input type="checkbox" value="5" /> Fri</label>
+                <label><input type="checkbox" value="6" /> Sat</label>
+              </div>
+            </div>
+
+            <button id="saveTaskBtn" class="primary-wide-btn">Save Task</button>
+            <button id="cancelTaskEditBtn" class="secondary-btn hidden">Cancel Edit</button>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title-row">
+            <h3>Tasks for this day</h3>
+          </div>
+          <div id="scheduledTaskList" class="task-list"></div>
+        </section>
+
+        <section class="weekly-card">
+          <div class="section-title-row">
+            <h3>Weekly summary</h3>
+            <p id="weeklyAverage">Avg: 0%</p>
+          </div>
+
+          <div id="weeklySummary" class="weekly-summary"></div>
+        </section>
+
+        <div class="bottom-buttons">
+          <button id="resetBtn" class="secondary-btn">Reset This Day</button>
         </div>
-      </section>
+      </main>
 
-      <section class="weekly-card">
-        <div class="section-title-row">
-          <h3>Weekly summary</h3>
-          <p id="weeklyAverage">Avg: 0%</p>
-        </div>
+      <main id="calendarScreen" class="app-screen hidden">
+        <section class="calendar-full-card">
+          <div class="calendar-title-row">
+            <div>
+              <p class="label">Month view</p>
+              <h3>Calendar</h3>
+            </div>
+            <button id="calendarTodayBtn" class="small-btn">Today</button>
+          </div>
 
-        <div id="weeklySummary" class="weekly-summary"></div>
-      </section>
+          <div class="calendar-header">
+            <button id="prevMonthBtn">←</button>
+            <h3 id="calendarMonthLabel">Month</h3>
+            <button id="nextMonthBtn">→</button>
+          </div>
 
-      <section class="add-task-card">
-        <h3>Add a task</h3>
+          <div class="calendar-weekdays">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+          </div>
 
-        <input
-          type="text"
-          id="taskInput"
-          placeholder="Example: Work out, study, clean room"
-        />
+          <div id="calendarGrid" class="calendar-grid calendar-grid-large"></div>
 
-        <div class="add-buttons">
-          <button id="addDailyTaskBtn">Daily Task</button>
-          <button id="addOneDayTaskBtn">One-Day Task</button>
-        </div>
+          <div class="monthly-summary-card">
+  <div class="section-title-row">
+    <div>
+      <p class="label">Monthly stats</p>
+      <h3>Month summary</h3>
+    </div>
+  </div>
 
-        <p class="hint">
-          Daily tasks repeat every day. One-day tasks only show up on the selected day.
-        </p>
-      </section>
+  <div class="monthly-summary-grid">
+    <div class="monthly-stat">
+      <p>Average</p>
+      <h2 id="monthAverage">0%</h2>
+    </div>
 
-      <section class="section">
-        <div class="section-title-row">
-          <h3>Daily repeating tasks</h3>
-        </div>
-        <div id="dailyTaskList" class="task-list"></div>
-      </section>
+    <div class="monthly-stat">
+      <p>Best day</p>
+      <h2 id="monthBest">0%</h2>
+    </div>
 
-      <section class="section">
-        <div class="section-title-row">
-          <h3>Tasks for this day only</h3>
-        </div>
-        <div id="oneDayTaskList" class="task-list"></div>
-      </section>
+    <div class="monthly-stat">
+      <p>Successful days</p>
+      <h2 id="monthSuccessfulDays">0</h2>
+    </div>
+  </div>
+</div>
 
-      <div class="bottom-buttons">
-        <button id="resetBtn" class="secondary-btn">Reset This Day</button>
-      </div>
+          <p class="hint calendar-hint">
+            Tap any day to select it and return to your daily checklist.
+          </p>
+        </section>
+      </main>
+
+      <main id="goalsScreen" class="app-screen hidden">
+        <section class="goals-card">
+          <div class="section-title-row">
+            <div>
+              <p class="label">Big picture</p>
+              <h3>Long-term goals</h3>
+            </div>
+            <button id="toggleGoalFormBtn" class="small-btn">+ Goal</button>
+          </div>
+
+          <div id="goalForm" class="goal-form hidden">
+            <input type="text" id="goalNameInput" placeholder="Goal name, example: Build muscle" />
+
+            <select id="goalTypeSelect">
+              <option value="number">Number target</option>
+              <option value="milestone">Milestone checklist</option>
+              <option value="habit">Habit-linked goal</option>
+            </select>
+
+            <input type="date" id="goalDeadlineInput" />
+
+            <div id="numberGoalFields" class="goal-type-fields">
+              <input type="number" id="goalCurrentInput" placeholder="Current amount, example: 100" />
+              <input type="number" id="goalTargetInput" placeholder="Target amount, example: 500" />
+            </div>
+
+            <div id="milestoneGoalFields" class="goal-type-fields hidden">
+              <textarea id="goalMilestonesInput" placeholder="Enter milestones, one per line&#10;Example:&#10;Choose parts&#10;Build prototype&#10;Test it"></textarea>
+            </div>
+
+            <div id="habitGoalFields" class="goal-type-fields hidden">
+              <p class="hint">Choose repeating tasks that connect to this goal.</p>
+              <div id="habitTaskChoices" class="habit-task-choices"></div>
+            </div>
+
+            <button id="saveGoalBtn" class="primary-wide-btn">Save Goal</button>
+            <button id="cancelGoalEditBtn" class="secondary-btn hidden">Cancel Edit</button>
+          </div>
+
+          <div id="goalsList" class="goals-list"></div>
+        </section>
+      </main>
+
+      <main id="settingsScreen" class="app-screen hidden">
+        <section class="settings-card">
+          <p class="label">Customize</p>
+          <h3>Settings</h3>
+
+          <div class="setting-group">
+            <h4>Theme color</h4>
+            <p class="hint">Choose the main color for buttons, progress bars, and highlights.</p>
+
+            <div class="theme-options">
+              <button type="button" class="theme-btn blue" data-theme="blue">Blue</button>
+              <button type="button" class="theme-btn green" data-theme="green">Green</button>
+              <button type="button" class="theme-btn purple" data-theme="purple">Purple</button>
+              <button type="button" class="theme-btn orange" data-theme="orange">Orange</button>
+              <button type="button" class="theme-btn red" data-theme="red">Red</button>
+            </div>
+          </div>
+
+<div class="setting-group">
+  <h4>Success goal</h4>
+  <p class="hint">
+    A day counts toward your streak when your score is at or above this percentage.
+  </p>
+
+  <div class="range-row">
+    <input type="range" id="successGoalInput" min="50" max="100" step="5" />
+    <strong id="successGoalValue">75%</strong>
+  </div>
+</div>
+
+<div class="setting-group">
+  <h4>Appearance</h4>
+  <p class="hint">Choose light mode or dark mode.</p>
+
+  <div class="appearance-options">
+    <button type="button" class="appearance-btn" data-appearance="light">Light</button>
+    <button type="button" class="appearance-btn" data-appearance="dark">Dark</button>
+  </div>
+</div>
+
+        </section>
+      </main>
+
+      <nav class="bottom-nav">
+        <button id="todayNavBtn" class="nav-tab active">
+          <span class="nav-icon">✓</span>
+          <span>Today</span>
+        </button>
+
+        <button id="calendarNavBtn" class="nav-tab">
+          <span class="nav-icon">📅</span>
+          <span>Calendar</span>
+        </button>
+
+        <button id="goalsNavBtn" class="nav-tab">
+          <span class="nav-icon">🎯</span>
+          <span>Goals</span>
+        </button>
+
+        <button id="settingsNavBtn" class="nav-tab">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </button>
+      </nav>
+
       <p class="credit">By Aaron Emory</p>
     </div>
   </div>
 
-  <script src="script.js"></script>
+ <script src="script.js?v=13"></script>
 </body>
 </html>
