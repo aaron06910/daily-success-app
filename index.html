@@ -6,12 +6,13 @@
 
   <title>Daily Success</title>
 
-  <link rel="stylesheet" href="style.css?v=13" />
+  <link rel="stylesheet" href="style.css?v=15" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icon.svg" />
 
   <meta name="theme-color" content="#2563eb" />
 </head>
+
 <body>
   <div class="phone-shell">
     <div class="app">
@@ -26,6 +27,7 @@
         </div>
       </header>
 
+      <!-- TODAY SCREEN -->
       <main id="todayScreen" class="app-screen">
         <section class="date-card">
           <p class="label">Selected day</p>
@@ -44,6 +46,7 @@
 
         <section class="score-card">
           <p class="label">Day score</p>
+
           <div class="score-row">
             <div>
               <div class="score-number" id="score">0%</div>
@@ -56,28 +59,6 @@
           </div>
         </section>
 
-        <section class="streak-card">
-  <div class="section-title-row">
-    <div>
-      <p class="label">Streaks</p>
-      <h3>Success streak</h3>
-    </div>
-    <div class="goal-pill" id="successGoalLabel">Goal: 75%</div>
-  </div>
-
-  <div class="streak-grid">
-    <div class="streak-box">
-      <p>Current streak</p>
-      <h2 id="currentStreak">0 days</h2>
-    </div>
-
-    <div class="streak-box">
-      <p>Best streak</p>
-      <h2 id="bestStreak">0 days</h2>
-    </div>
-  </div>
-</section>
-
         <section class="add-task-card">
           <div class="section-title-row">
             <h3>Tasks</h3>
@@ -88,8 +69,13 @@
             <input
               type="text"
               id="taskInput"
-              placeholder="Example: Work out, study, clean room"
+              placeholder="Task title, example: Work out"
             />
+
+            <textarea
+              id="taskDescriptionInput"
+              placeholder="Optional description, notes, workout plan, details, etc."
+            ></textarea>
 
             <select id="taskRepeatSelect">
               <option value="once">Never repeat / one-time task</option>
@@ -139,6 +125,7 @@
           <div class="section-title-row">
             <h3>Tasks for this day</h3>
           </div>
+
           <div id="scheduledTaskList" class="task-list"></div>
         </section>
 
@@ -156,6 +143,7 @@
         </div>
       </main>
 
+      <!-- CALENDAR SCREEN -->
       <main id="calendarScreen" class="app-screen hidden">
         <section class="calendar-full-card">
           <div class="calendar-title-row">
@@ -163,6 +151,7 @@
               <p class="label">Month view</p>
               <h3>Calendar</h3>
             </div>
+
             <button id="calendarTodayBtn" class="small-btn">Today</button>
           </div>
 
@@ -182,40 +171,135 @@
             <span>Sat</span>
           </div>
 
-          <div id="calendarGrid" class="calendar-grid calendar-grid-large"></div>
-
-          <div class="monthly-summary-card">
-  <div class="section-title-row">
-    <div>
-      <p class="label">Monthly stats</p>
-      <h3>Month summary</h3>
-    </div>
-  </div>
-
-  <div class="monthly-summary-grid">
-    <div class="monthly-stat">
-      <p>Average</p>
-      <h2 id="monthAverage">0%</h2>
-    </div>
-
-    <div class="monthly-stat">
-      <p>Best day</p>
-      <h2 id="monthBest">0%</h2>
-    </div>
-
-    <div class="monthly-stat">
-      <p>Successful days</p>
-      <h2 id="monthSuccessfulDays">0</h2>
-    </div>
-  </div>
-</div>
+          <div id="calendarGrid" class="calendar-grid"></div>
 
           <p class="hint calendar-hint">
-            Tap any day to select it and return to your daily checklist.
+            Tap any day to open it on the Today screen.
           </p>
+        </section>
+
+        <section class="monthly-summary-card">
+          <div class="section-title-row">
+            <div>
+              <p class="label">Monthly stats</p>
+              <h3>Month summary</h3>
+            </div>
+          </div>
+
+          <div class="monthly-summary-grid">
+            <div class="monthly-stat">
+              <p>Average</p>
+              <h2 id="monthAverage">0%</h2>
+            </div>
+
+            <div class="monthly-stat">
+              <p>Best day</p>
+              <h2 id="monthBest">0%</h2>
+            </div>
+
+            <div class="monthly-stat">
+              <p>Successful days</p>
+              <h2 id="monthSuccessfulDays">0</h2>
+            </div>
+          </div>
         </section>
       </main>
 
+      <!-- LISTS SCREEN -->
+      <main id="listsScreen" class="app-screen hidden">
+        <section class="lists-card">
+          <div class="section-title-row">
+            <div>
+              <p class="label">Simple lists</p>
+              <h3>Lists</h3>
+            </div>
+          </div>
+
+          <div class="list-create-box">
+            <input id="newListInput" type="text" placeholder="New list name, example: Shopping list" />
+            <button id="addListBtn" class="primary-wide-btn">Create List</button>
+          </div>
+
+          <div id="listsContainer" class="lists-container"></div>
+        </section>
+      </main>
+
+      <!-- STATS SCREEN -->
+      <main id="statsScreen" class="app-screen hidden">
+        <section class="momentum-card">
+          <div class="section-title-row">
+            <div>
+              <p class="label">Momentum</p>
+              <h3>Discipline rank</h3>
+            </div>
+
+            <div class="goal-pill" id="momentumRank">Starter</div>
+          </div>
+
+          <div class="momentum-main">
+            <div>
+              <div class="momentum-score" id="momentumScore">0 XP</div>
+              <p id="momentumMessage">Build momentum by having successful days.</p>
+            </div>
+          </div>
+
+          <div class="momentum-progress">
+            <div id="momentumProgressFill"></div>
+          </div>
+
+          <p class="hint" id="momentumNextRank">Next rank: Building</p>
+        </section>
+
+        <section class="stats-card">
+          <div class="section-title-row">
+            <div>
+              <p class="label">Performance</p>
+              <h3>Stats</h3>
+            </div>
+
+            <div class="goal-pill" id="successGoalLabel">Goal: 75%</div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <p>Current streak</p>
+              <h2 id="currentStreak">0 days</h2>
+            </div>
+
+            <div class="stat-box">
+              <p>Best streak</p>
+              <h2 id="bestStreak">0 days</h2>
+            </div>
+
+            <div class="stat-box">
+              <p>7-day average</p>
+              <h2 id="sevenDayAverage">0%</h2>
+            </div>
+
+            <div class="stat-box">
+              <p>30-day average</p>
+              <h2 id="thirtyDayAverage">0%</h2>
+            </div>
+
+            <div class="stat-box">
+              <p>Successful days</p>
+              <h2 id="totalSuccessfulDays">0</h2>
+            </div>
+
+            <div class="stat-box">
+              <p>Perfect days</p>
+              <h2 id="totalPerfectDays">0</h2>
+            </div>
+
+            <div class="stat-box wide-stat">
+              <p>Total tasks completed</p>
+              <h2 id="totalCompletedTasks">0</h2>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- GOALS SCREEN -->
       <main id="goalsScreen" class="app-screen hidden">
         <section class="goals-card">
           <div class="section-title-row">
@@ -223,6 +307,7 @@
               <p class="label">Big picture</p>
               <h3>Long-term goals</h3>
             </div>
+
             <button id="toggleGoalFormBtn" class="small-btn">+ Goal</button>
           </div>
 
@@ -243,7 +328,7 @@
             </div>
 
             <div id="milestoneGoalFields" class="goal-type-fields hidden">
-              <textarea id="goalMilestonesInput" placeholder="Enter milestones, one per line&#10;Example:&#10;Choose parts&#10;Build prototype&#10;Test it"></textarea>
+              <textarea id="goalMilestonesInput" placeholder="Enter milestones, one per line"></textarea>
             </div>
 
             <div id="habitGoalFields" class="goal-type-fields hidden">
@@ -259,6 +344,7 @@
         </section>
       </main>
 
+      <!-- SETTINGS SCREEN -->
       <main id="settingsScreen" class="app-screen hidden">
         <section class="settings-card">
           <p class="label">Customize</p>
@@ -274,34 +360,53 @@
               <button type="button" class="theme-btn purple" data-theme="purple">Purple</button>
               <button type="button" class="theme-btn orange" data-theme="orange">Orange</button>
               <button type="button" class="theme-btn red" data-theme="red">Red</button>
+              <button type="button" class="theme-btn pink" data-theme="pink">Pink</button>
             </div>
           </div>
 
-<div class="setting-group">
-  <h4>Success goal</h4>
-  <p class="hint">
-    A day counts toward your streak when your score is at or above this percentage.
-  </p>
+          <div class="setting-group">
+            <h4>Success goal</h4>
+            <p class="hint">
+              A day counts toward your streak when your score is at or above this percentage.
+            </p>
 
-  <div class="range-row">
-    <input type="range" id="successGoalInput" min="50" max="100" step="5" />
-    <strong id="successGoalValue">75%</strong>
-  </div>
-</div>
+            <div class="range-row">
+              <input type="range" id="successGoalInput" min="50" max="100" step="5" />
+              <strong id="successGoalValue">75%</strong>
+            </div>
+          </div>
 
-<div class="setting-group">
-  <h4>Appearance</h4>
-  <p class="hint">Choose light mode or dark mode.</p>
+          <div class="setting-group">
+            <h4>Appearance</h4>
+            <p class="hint">Choose light mode or dark mode.</p>
 
-  <div class="appearance-options">
-    <button type="button" class="appearance-btn" data-appearance="light">Light</button>
-    <button type="button" class="appearance-btn" data-appearance="dark">Dark</button>
-  </div>
-</div>
+            <div class="appearance-options">
+              <button type="button" class="appearance-btn" data-appearance="light">Light</button>
+              <button type="button" class="appearance-btn" data-appearance="dark">Dark</button>
+            </div>
+          </div>
 
+          <div class="setting-group">
+            <h4>Backup</h4>
+            <p class="hint">
+              Export your data before using the app seriously. Import restores tasks, goals, lists, settings, and history.
+            </p>
+
+            <div class="backup-buttons">
+              <button id="exportDataBtn" class="primary-wide-btn">Export Backup</button>
+              <button id="importDataBtn" class="secondary-btn">Import Backup</button>
+              <input type="file" id="importDataInput" accept=".json,application/json" class="hidden" />
+            </div>
+          </div>
+
+          <div class="setting-group">
+            <h4>App version</h4>
+            <p class="hint">Version v15 — final testing build</p>
+          </div>
         </section>
       </main>
 
+      <!-- BOTTOM NAV -->
       <nav class="bottom-nav">
         <button id="todayNavBtn" class="nav-tab active">
           <span class="nav-icon">✓</span>
@@ -311,6 +416,16 @@
         <button id="calendarNavBtn" class="nav-tab">
           <span class="nav-icon">📅</span>
           <span>Calendar</span>
+        </button>
+
+        <button id="listsNavBtn" class="nav-tab">
+          <span class="nav-icon">📝</span>
+          <span>Lists</span>
+        </button>
+
+        <button id="statsNavBtn" class="nav-tab">
+          <span class="nav-icon">📊</span>
+          <span>Stats</span>
         </button>
 
         <button id="goalsNavBtn" class="nav-tab">
@@ -328,6 +443,6 @@
     </div>
   </div>
 
- <script src="script.js?v=13"></script>
+  <script src="script.js?v=15"></script>
 </body>
 </html>
