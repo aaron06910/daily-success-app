@@ -547,7 +547,6 @@ function renderDayScroll() {
       selectedDateKey = dayKey;
       calendarMonthDate = keyToDate(selectedDateKey);
       renderApp();
-      window.cloudSync?.initialize();
     });
 
     dayScroll.appendChild(pill);
@@ -2596,3 +2595,4 @@ applyTheme(appTheme);
 renderSettings();
 registerServiceWorker();
 renderApp();
+window.cloudSync?.initialize();
