@@ -6,7 +6,7 @@
 
   <title>Daily Success</title>
 
-  <link rel="stylesheet" href="style.css?v=22" />
+  <link rel="stylesheet" href="style.css?v=23" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icon.svg" />
 
@@ -19,7 +19,64 @@
   <div class="bg-glow glow-two"></div>
   <div class="bg-glow glow-three"></div>
 
-  <div class="phone-shell">
+  <section id="authScreen" class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path
+          d="M13 39L26 51L52 15"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M31 33L52 15"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="8"
+          stroke-linecap="round"
+        />
+      </svg>
+    </div>
+
+    <p class="label">Daily Success Cloud</p>
+    <h1>Welcome back</h1>
+
+    <p class="auth-description">
+      Sign in to synchronize your tasks, goals, workouts, lists, and progress.
+    </p>
+
+    <label class="auth-label" for="authEmailInput">Email</label>
+    <input
+      id="authEmailInput"
+      type="email"
+      autocomplete="email"
+      placeholder="you@example.com"
+    />
+
+    <label class="auth-label" for="authPasswordInput">Password</label>
+    <input
+      id="authPasswordInput"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Enter your password"
+    />
+
+    <button id="signInBtn" class="primary-wide-btn">
+      Sign In
+    </button>
+
+    <button id="signUpBtn" class="secondary-btn">
+      Create Account
+    </button>
+
+    <p id="authMessage" class="auth-message"></p>
+  </div>
+</section>
+
+  <div id="mainAppShell" class="phone-shell hidden">
     <div class="app">
 
       <header class="top-header">
@@ -61,6 +118,18 @@
           <span id="miniDay">Today</span>
         </div>
       </header>
+      <section id="accountBar" class="account-bar">
+  <div class="account-details">
+    <span class="account-label">Signed in as</span>
+    <strong id="accountEmail">Loading...</strong>
+    <span id="syncStatus" class="sync-status">Connecting...</span>
+  </div>
+
+  <div class="account-actions">
+    <button id="syncNowBtn" type="button">Sync Now</button>
+    <button id="signOutBtn" type="button">Sign Out</button>
+  </div>
+</section>
 
       <!-- TODAY SCREEN -->
       <main id="todayScreen" class="app-screen">
@@ -616,6 +685,9 @@
     </div>
   </div>
 
-  <script src="script.js?v=22"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js?v=23"></script>
+<script src="cloud-sync.js?v=23"></script>
+<script src="script.js?v=23"></script>
 </body>
 </html>

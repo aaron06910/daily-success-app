@@ -1,4 +1,4 @@
-const APP_VERSION = "v19";
+const APP_VERSION = "v23";
 
 /* -----------------------------
    ELEMENTS
@@ -158,7 +158,12 @@ function safeLoad(key, fallback) {
 }
 
 function saveData(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
+  localStorage.setItem(
+    key,
+    JSON.stringify(data)
+  );
+
+  window.cloudSync?.scheduleSave(key);
 }
 
 function saveAllMainData() {
@@ -542,6 +547,7 @@ function renderDayScroll() {
       selectedDateKey = dayKey;
       calendarMonthDate = keyToDate(selectedDateKey);
       renderApp();
+      window.cloudSync?.initialize();
     });
 
     dayScroll.appendChild(pill);

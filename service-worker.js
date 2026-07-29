@@ -1,10 +1,12 @@
-const CACHE_NAME = "daily-success-cache-v22";
+const CACHE_NAME = "daily-success-cache-v23";
 
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
-  "./style.css",
-  "./script.js",
+  "./style.css?v=23",
+  "./script.js?v=23",
+  "./supabase-config.js?v=23",
+  "./cloud-sync.js?v=23",
   "./manifest.json",
   "./icon.svg"
 ];
