@@ -6,20 +6,55 @@
 
   <title>Daily Success</title>
 
-  <link rel="stylesheet" href="style.css?v=15" />
+  <link rel="stylesheet" href="style.css?v=22" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icon.svg" />
 
-  <meta name="theme-color" content="#2563eb" />
+  <meta name="theme-color" content="#0f172a" />
 </head>
 
 <body>
+  <div class="background-texture"></div>
+  <div class="bg-glow glow-one"></div>
+  <div class="bg-glow glow-two"></div>
+  <div class="bg-glow glow-three"></div>
+
   <div class="phone-shell">
     <div class="app">
+
       <header class="top-header">
-        <div>
-          <p class="eyebrow">Daily tracker</p>
-          <h1>Daily Success</h1>
+        <div class="brand-block">
+          <div class="brand-mark">
+  <svg class="brand-logo" viewBox="0 0 64 64" aria-hidden="true">
+    <defs>
+      <linearGradient id="brandLogoGradient" x1="8" y1="8" x2="56" y2="56">
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="45%" stop-color="#dbeafe" />
+        <stop offset="100%" stop-color="#ffffff" />
+      </linearGradient>
+    </defs>
+
+    <path
+      d="M34 6L14 36h16l-4 22 24-34H33l1-18z"
+      fill="url(#brandLogoGradient)"
+    />
+
+    <path
+      d="M18 42l7 7 19-22"
+      fill="none"
+      stroke="rgba(255,255,255,0.92)"
+      stroke-width="5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</div>
+
+          <div>
+            <p class="eyebrow">Momentum system</p>
+            <h1>Daily Success</h1>
+            <p class="header-subtitle">Track your habits, goals, workouts, and discipline.</p>
+          </div>
         </div>
 
         <div class="today-badge">
@@ -29,40 +64,44 @@
 
       <!-- TODAY SCREEN -->
       <main id="todayScreen" class="app-screen">
-        <section class="date-card">
-          <p class="label">Selected day</p>
-          <h2 id="currentDate">Loading...</h2>
+        <section class="hero-card dashboard-hero">
+          <div class="hero-pattern"></div>
 
-          <div class="nav-buttons">
-            <button id="prevDayBtn">← Previous</button>
-            <button id="todayBtn">Today</button>
-            <button id="nextDayBtn">Next →</button>
+          <div class="hero-content">
+            <p class="label">Selected day</p>
+            <h2 id="currentDate">Loading...</h2>
+
+            <div class="score-row hero-score-row">
+              <div>
+                <div class="score-number" id="score">0%</div>
+                <div class="score-text" id="message">Start checking things off.</div>
+              </div>
+
+              <div class="circle-score">
+                <span id="completedCount">0/0</span>
+              </div>
+            </div>
+
+            <div class="nav-buttons hero-buttons">
+              <button id="prevDayBtn">Previous</button>
+              <button id="todayBtn">Today</button>
+              <button id="nextDayBtn">Next</button>
+            </div>
+
+            <button id="openCalendarBtn" class="primary-wide-btn">Open Calendar</button>
           </div>
-
-          <button id="openCalendarBtn" class="primary-wide-btn">Open Calendar</button>
         </section>
 
         <div id="dayScroll" class="day-scroll"></div>
 
-        <section class="score-card">
-          <p class="label">Day score</p>
-
-          <div class="score-row">
-            <div>
-              <div class="score-number" id="score">0%</div>
-              <div class="score-text" id="message">Start checking things off.</div>
-            </div>
-
-            <div class="circle-score">
-              <span id="completedCount">0/0</span>
-            </div>
-          </div>
-        </section>
-
         <section class="add-task-card">
           <div class="section-title-row">
-            <h3>Tasks</h3>
-            <button id="toggleTaskFormBtn" class="small-btn">+ Task</button>
+            <div>
+              <p class="label">Plan</p>
+              <h3>Build your day</h3>
+            </div>
+
+            <button id="toggleTaskFormBtn" class="small-btn">Add Task</button>
           </div>
 
           <div id="taskForm" class="task-form hidden">
@@ -77,33 +116,38 @@
               placeholder="Optional description, notes, workout plan, details, etc."
             ></textarea>
 
+            <div class="form-grid-two">
+              <div>
+                <p class="field-label">Starts on</p>
+                <input type="date" id="taskStartDateInput" />
+              </div>
+
+              <div>
+                <p class="field-label">Ends on</p>
+                <input type="date" id="taskEndDateInput" />
+              </div>
+            </div>
+
+            <p class="hint no-top">
+              Leave the end date blank if you want the task to continue forever.
+            </p>
+
+            <p class="field-label">Repeat</p>
             <select id="taskRepeatSelect">
-              <option value="once">Never repeat / one-time task</option>
-              <option value="daily">Every day</option>
-              <option value="weekly">Weekly</option>
-              <option value="custom">Custom days of week</option>
+              <option value="once">Never / one-time task</option>
+              <option value="daily">Daily</option>
+              <option value="everyOtherDay">Every other day</option>
+              <option value="everyXDays">Every X days</option>
+              <option value="weekly">Specific days of the week</option>
             </select>
 
-            <div id="taskDateField">
-              <p class="hint">Choose the day this one-time task should appear.</p>
-              <input type="date" id="taskDateInput" />
+            <div id="everyXDaysField" class="hidden">
+              <p class="field-label">Repeat every how many days?</p>
+              <input type="number" id="taskIntervalInput" min="1" max="365" value="3" />
             </div>
 
-            <div id="weeklyField" class="hidden">
-              <p class="hint">Choose which weekday this task repeats on.</p>
-              <select id="weeklyDaySelect">
-                <option value="0">Sunday</option>
-                <option value="1">Monday</option>
-                <option value="2">Tuesday</option>
-                <option value="3">Wednesday</option>
-                <option value="4">Thursday</option>
-                <option value="5">Friday</option>
-                <option value="6">Saturday</option>
-              </select>
-            </div>
-
-            <div id="customDaysField" class="hidden">
-              <p class="hint">Choose the days this task should repeat.</p>
+            <div id="weeklyDaysField" class="hidden">
+              <p class="field-label">Choose repeat days</p>
 
               <div class="weekday-options">
                 <label><input type="checkbox" value="0" /> Sun</label>
@@ -121,9 +165,12 @@
           </div>
         </section>
 
-        <section class="section">
+        <section class="section task-section">
           <div class="section-title-row">
-            <h3>Tasks for this day</h3>
+            <div>
+              <p class="label">Execute</p>
+              <h3>Today’s mission</h3>
+            </div>
           </div>
 
           <div id="scheduledTaskList" class="task-list"></div>
@@ -131,8 +178,12 @@
 
         <section class="weekly-card">
           <div class="section-title-row">
-            <h3>Weekly summary</h3>
-            <p id="weeklyAverage">Avg: 0%</p>
+            <div>
+              <p class="label">This week</p>
+              <h3>Weekly rhythm</h3>
+            </div>
+
+            <p id="weeklyAverage" class="summary-pill">Avg: 0%</p>
           </div>
 
           <div id="weeklySummary" class="weekly-summary"></div>
@@ -173,9 +224,7 @@
 
           <div id="calendarGrid" class="calendar-grid"></div>
 
-          <p class="hint calendar-hint">
-            Tap any day to open it on the Today screen.
-          </p>
+          <p class="hint calendar-hint">Tap any day to open it on the Today screen.</p>
         </section>
 
         <section class="monthly-summary-card">
@@ -187,17 +236,17 @@
           </div>
 
           <div class="monthly-summary-grid">
-            <div class="monthly-stat">
+            <div class="mini-stat">
               <p>Average</p>
               <h2 id="monthAverage">0%</h2>
             </div>
 
-            <div class="monthly-stat">
+            <div class="mini-stat">
               <p>Best day</p>
               <h2 id="monthBest">0%</h2>
             </div>
 
-            <div class="monthly-stat">
+            <div class="mini-stat">
               <p>Successful days</p>
               <h2 id="monthSuccessfulDays">0</h2>
             </div>
@@ -210,7 +259,7 @@
         <section class="lists-card">
           <div class="section-title-row">
             <div>
-              <p class="label">Simple lists</p>
+              <p class="label">Support lists</p>
               <h3>Lists</h3>
             </div>
           </div>
@@ -224,9 +273,87 @@
         </section>
       </main>
 
+      <!-- WORKOUT SCREEN -->
+      <main id="workoutScreen" class="app-screen hidden">
+        <section class="workout-card workout-hero-card">
+          <div class="hero-pattern"></div>
+
+          <div class="section-title-row">
+            <div>
+              <p class="label">Progressive overload</p>
+              <h3>Workout Tracker</h3>
+            </div>
+          </div>
+
+          <div class="workout-add-exercise">
+            <input id="exerciseNameInput" type="text" placeholder="Exercise name, example: Bench Press" />
+            <button id="addExerciseBtn" class="primary-wide-btn">Add Exercise</button>
+          </div>
+
+          <div class="divider"></div>
+
+          <p class="field-label">Select exercise</p>
+          <select id="exerciseSelect"></select>
+
+          <div class="workout-last-card">
+            <p class="label">Last logged</p>
+            <h4 id="exerciseLastLog">No exercise selected yet.</h4>
+            <p id="exerciseBestLog" class="hint">Add an entry to start tracking progress.</p>
+          </div>
+
+          <div class="workout-log-form">
+            <p class="field-label">Date</p>
+            <input id="workoutDateInput" type="date" />
+
+            <div class="set-builder-header">
+              <div>
+                <p class="field-label">Sets</p>
+                <p class="hint no-top">Track each set separately for better progressive overload.</p>
+              </div>
+
+              <button id="addWorkoutSetBtn" type="button" class="small-btn">Add Set</button>
+            </div>
+
+            <div id="workoutSetsBuilder" class="workout-sets-builder"></div>
+
+            <textarea id="workoutNotesInput" placeholder="Optional notes, example: felt easy, increase next time"></textarea>
+
+            <button id="saveWorkoutLogBtn" class="primary-wide-btn">Save Workout Entry</button>
+          </div>
+        </section>
+
+        <section class="chart-card">
+          <div class="section-title-row">
+            <div>
+              <p class="label">Exercise progress</p>
+              <h3 id="exerciseChartTitle">Progress chart</h3>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <canvas id="workoutChart" height="210"></canvas>
+          </div>
+
+          <p class="hint">The chart tracks total volume: weight × reps across every set.</p>
+        </section>
+
+        <section class="section">
+          <div class="section-title-row">
+            <div>
+              <p class="label">History</p>
+              <h3>Recent entries</h3>
+            </div>
+          </div>
+
+          <div id="workoutHistoryList" class="workout-history-list"></div>
+        </section>
+      </main>
+
       <!-- STATS SCREEN -->
       <main id="statsScreen" class="app-screen hidden">
         <section class="momentum-card">
+          <div class="hero-pattern"></div>
+
           <div class="section-title-row">
             <div>
               <p class="label">Momentum</p>
@@ -261,40 +388,66 @@
           </div>
 
           <div class="stats-grid">
-            <div class="stat-box">
+            <div class="mini-stat">
               <p>Current streak</p>
               <h2 id="currentStreak">0 days</h2>
             </div>
 
-            <div class="stat-box">
+            <div class="mini-stat">
               <p>Best streak</p>
               <h2 id="bestStreak">0 days</h2>
             </div>
 
-            <div class="stat-box">
+            <div class="mini-stat">
               <p>7-day average</p>
               <h2 id="sevenDayAverage">0%</h2>
             </div>
 
-            <div class="stat-box">
+            <div class="mini-stat">
               <p>30-day average</p>
               <h2 id="thirtyDayAverage">0%</h2>
             </div>
 
-            <div class="stat-box">
+            <div class="mini-stat">
               <p>Successful days</p>
               <h2 id="totalSuccessfulDays">0</h2>
             </div>
 
-            <div class="stat-box">
+            <div class="mini-stat">
               <p>Perfect days</p>
               <h2 id="totalPerfectDays">0</h2>
             </div>
 
-            <div class="stat-box wide-stat">
+            <div class="mini-stat wide-stat">
               <p>Total tasks completed</p>
               <h2 id="totalCompletedTasks">0</h2>
             </div>
+          </div>
+        </section>
+
+        <section class="chart-card">
+          <div class="section-title-row">
+            <div>
+              <p class="label">Last 14 days</p>
+              <h3>Daily score graph</h3>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <canvas id="scoreChart" height="210"></canvas>
+          </div>
+        </section>
+
+        <section class="chart-card">
+          <div class="section-title-row">
+            <div>
+              <p class="label">Last 14 days</p>
+              <h3>Tasks completed graph</h3>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <canvas id="tasksChart" height="210"></canvas>
           </div>
         </section>
       </main>
@@ -305,35 +458,36 @@
           <div class="section-title-row">
             <div>
               <p class="label">Big picture</p>
-              <h3>Long-term goals</h3>
+              <h3>Goals</h3>
             </div>
 
-            <button id="toggleGoalFormBtn" class="small-btn">+ Goal</button>
+            <button id="toggleGoalFormBtn" class="small-btn">Add Goal</button>
           </div>
 
           <div id="goalForm" class="goal-form hidden">
             <input type="text" id="goalNameInput" placeholder="Goal name, example: Build muscle" />
 
             <select id="goalTypeSelect">
-              <option value="number">Number target</option>
+              <option value="number">Number target with graph</option>
               <option value="milestone">Milestone checklist</option>
-              <option value="habit">Habit-linked goal</option>
+              <option value="progress">Progress journal / notes goal</option>
             </select>
 
             <input type="date" id="goalDeadlineInput" />
 
             <div id="numberGoalFields" class="goal-type-fields">
-              <input type="number" id="goalCurrentInput" placeholder="Current amount, example: 100" />
-              <input type="number" id="goalTargetInput" placeholder="Target amount, example: 500" />
+              <input type="number" id="goalCurrentInput" placeholder="Current amount, example: 180" />
+              <input type="number" id="goalTargetInput" placeholder="Target amount, example: 190" />
+              <p class="hint no-top">Number goals save progress history so the graph can show change over time.</p>
             </div>
 
             <div id="milestoneGoalFields" class="goal-type-fields hidden">
               <textarea id="goalMilestonesInput" placeholder="Enter milestones, one per line"></textarea>
             </div>
 
-            <div id="habitGoalFields" class="goal-type-fields hidden">
-              <p class="hint">Choose repeating tasks that connect to this goal.</p>
-              <div id="habitTaskChoices" class="habit-task-choices"></div>
+            <div id="progressGoalFields" class="goal-type-fields hidden">
+              <input type="number" id="goalProgressInput" min="0" max="100" placeholder="Progress percent, example: 40" />
+              <textarea id="goalProgressNoteInput" placeholder="Starting note, example: I started this goal today."></textarea>
             </div>
 
             <button id="saveGoalBtn" class="primary-wide-btn">Save Goal</button>
@@ -351,16 +505,16 @@
           <h3>Settings</h3>
 
           <div class="setting-group">
-            <h4>Theme color</h4>
-            <p class="hint">Choose the main color for buttons, progress bars, and highlights.</p>
+            <h4>Visual theme</h4>
+            <p class="hint">Choose the overall look of the app.</p>
 
             <div class="theme-options">
-              <button type="button" class="theme-btn blue" data-theme="blue">Blue</button>
-              <button type="button" class="theme-btn green" data-theme="green">Green</button>
-              <button type="button" class="theme-btn purple" data-theme="purple">Purple</button>
-              <button type="button" class="theme-btn orange" data-theme="orange">Orange</button>
-              <button type="button" class="theme-btn red" data-theme="red">Red</button>
-              <button type="button" class="theme-btn pink" data-theme="pink">Pink</button>
+              <button type="button" class="theme-btn blue" data-theme="blue">Ocean</button>
+              <button type="button" class="theme-btn green" data-theme="green">Forest</button>
+              <button type="button" class="theme-btn purple" data-theme="purple">Galaxy</button>
+              <button type="button" class="theme-btn orange" data-theme="orange">Sunset</button>
+              <button type="button" class="theme-btn red" data-theme="red">Ember</button>
+              <button type="button" class="theme-btn pink" data-theme="pink">Neon</button>
             </div>
           </div>
 
@@ -389,7 +543,7 @@
           <div class="setting-group">
             <h4>Backup</h4>
             <p class="hint">
-              Export your data before using the app seriously. Import restores tasks, goals, lists, settings, and history.
+              Export your data before big changes. Import restores tasks, goals, workouts, lists, settings, and history.
             </p>
 
             <div class="backup-buttons">
@@ -401,7 +555,7 @@
 
           <div class="setting-group">
             <h4>App version</h4>
-            <p class="hint">Version v15 — final testing build</p>
+            <p class="hint">Version v19 — complete visual redesign.</p>
           </div>
         </section>
       </main>
@@ -409,32 +563,51 @@
       <!-- BOTTOM NAV -->
       <nav class="bottom-nav">
         <button id="todayNavBtn" class="nav-tab active">
-          <span class="nav-icon">✓</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          </span>
           <span>Today</span>
         </button>
 
         <button id="calendarNavBtn" class="nav-tab">
-          <span class="nav-icon">📅</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M7 3v4M17 3v4M4 9h16M5 5h14v15H5z"/></svg>
+          </span>
           <span>Calendar</span>
         </button>
 
         <button id="listsNavBtn" class="nav-tab">
-          <span class="nav-icon">📝</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          </span>
           <span>Lists</span>
         </button>
 
+        <button id="workoutNavBtn" class="nav-tab">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/></svg>
+          </span>
+          <span>Workout</span>
+        </button>
+
         <button id="statsNavBtn" class="nav-tab">
-          <span class="nav-icon">📊</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>
+          </span>
           <span>Stats</span>
         </button>
 
         <button id="goalsNavBtn" class="nav-tab">
-          <span class="nav-icon">🎯</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0-9-9 9 9 0 0 0 9 9zM12 17a5 5 0 1 0-5-5 5 5 0 0 0 5 5zM12 13a1 1 0 1 0-1-1 1 1 0 0 0 1 1z"/></svg>
+          </span>
           <span>Goals</span>
         </button>
 
         <button id="settingsNavBtn" class="nav-tab">
-          <span class="nav-icon">⚙️</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5zM19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2 3.5-.2-.1a1.7 1.7 0 0 0-1.9.2 7.6 7.6 0 0 1-1.5.9 1.7 1.7 0 0 0-1 1.6v.2H9.2v-.2a1.7 1.7 0 0 0-1-1.6 7.6 7.6 0 0 1-1.5-.9 1.7 1.7 0 0 0-1.9-.2l-.2.1-2-3.5.1-.1A1.7 1.7 0 0 0 3 15a7.8 7.8 0 0 1 0-1.9 1.7 1.7 0 0 0-.3-1.9l-.1-.1 2-3.5.2.1a1.7 1.7 0 0 0 1.9-.2 7.6 7.6 0 0 1 1.5-.9 1.7 1.7 0 0 0 1-1.6v-.2h4v.2a1.7 1.7 0 0 0 1 1.6 7.6 7.6 0 0 1 1.5.9 1.7 1.7 0 0 0 1.9.2l.2-.1 2 3.5-.1.1a1.7 1.7 0 0 0-.3 1.9 7.8 7.8 0 0 1 0 1.9z"/></svg>
+          </span>
           <span>Settings</span>
         </button>
       </nav>
@@ -443,6 +616,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=15"></script>
+  <script src="script.js?v=22"></script>
 </body>
 </html>
