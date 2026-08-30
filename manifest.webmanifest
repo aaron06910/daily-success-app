@@ -1,0 +1,13 @@
+{
+  "name": "Daily Success — Personal OS",
+  "short_name": "Daily Success",
+  "description": "A customizable personal operating system for tasks, check-ins, goals, workouts, school, work, finances and weekly reviews.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090d15",
+  "theme_color": "#6d5dfc",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
