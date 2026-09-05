@@ -1,23 +1,14 @@
 {
-  "name": "Daily Success \u2014 Personal OS 2.0",
+  "name": "Daily Success — Personal OS",
   "short_name": "Daily Success",
-  "description": "A local-first personal operating system for projects, routines, planning, focus, knowledge, health, school, work, finances and growth.",
+  "description": "A private, local-first personal operating system for planning, execution, review, and growth.",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#090d15",
-  "theme_color": "#6d5dfc",
+  "background_color": "#0B1018",
+  "theme_color": "#0F172A",
   "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
   ]
 }

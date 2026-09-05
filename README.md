@@ -1,42 +1,33 @@
-# Daily Success — Personal OS 2.0 (Cloud Edition)
+# Daily Success — Personal OS Final
 
-This build keeps the existing Daily Success local-first + Supabase architecture and adds the larger Personal OS layer.
+Production-ready static Personal OS for GitHub Pages with Supabase authentication/cloud sync and an authenticated Supabase Edge Function for AI.
 
-## What is new
-- Projects + milestones + project-linked tasks
-- Routines with reusable steps and daily run history
-- Year / Quarter / Month / Week planning hierarchy
-- Daily Briefing + local OS Suggestions
-- Time blocking inside Calendar
-- Focus Mode with logged focus sessions
-- Ctrl/Cmd + K Command Center + universal search
-- Knowledge Vault
-- Auto-built Timeline
-- Local Insights engine (including cautious correlations)
-- Monthly / Quarterly / Yearly reviews
-- Modular area dashboards (turn modules on/off and reorder them)
-- AI-ready context permissions + AI context export
+## Deploy
+Upload these files to the root of the GitHub Pages repository:
+- index.html
+- sw.js
+- manifest.webmanifest
+- daily-success-icon.png
+- icon-192.png
+- icon-512.png
+- README.md
 
-## Cloud sync
-Everything remains in the same `dailySuccessV2` localStorage state and the same Supabase `public.app_data` JSONB row. Existing V3/Cloud data is merged with new V4 defaults automatically. No database migration is required for these new modules.
+Remove older unused app files such as `app.js`, `script.js`, `style.css`, `cloud-sync.js`, `service-worker.js`, `supabase-config.js`, and `manifest.json`.
 
-## AI note
-The app now prepares the data/context layer for an AI coach, but it does **not** put an AI provider secret into browser code. Live AI recommendations should be added later through a secure server-side function (for example a Supabase Edge Function with a server-side model key). The current Daily Briefing, Suggestions and Insights run locally.
+## AI
+The deployed `daily-success-ai` Supabase Edge Function expects an `OPENAI_API_KEY` secret in Supabase Edge Functions > Secrets. The browser app never contains that secret.
 
-## Deploy to GitHub Pages
-1. In the current app, Settings → Export JSON first.
-2. Replace the repo contents with the files from this package.
-3. Commit/push and wait for GitHub Pages to redeploy.
-4. Hard-refresh the published site once.
-5. Sign in and confirm the top-right cloud pill says `Synced`.
+AI is intentionally on-demand. It supports:
+- Next Best Action
+- Daily Briefing
+- Plan My Day
+- Inbox Triage
+- Project Rescue
+- Weekly Strategy
+- Pattern Analysis
+- Freeform Advisor chat
 
-## Files you need in the repo
-- `index.html`
-- `sw.js`
-- `manifest.webmanifest`
-- `daily-success-icon.png`
-- `icon-192.png`
-- `icon-512.png`
-- `README.md`
+Structured AI changes are proposals only and require user approval in the app before data is changed.
 
-Old standalone `app.js`, `script.js`, `style.css`, `cloud-sync.js`, `service-worker.js`, `supabase-config.js`, etc. are not used by this build and can be removed.
+## Data safety
+The app keeps the existing localStorage key `dailySuccessV2` for compatibility with prior Daily Success versions and continues local-first saving with background Supabase sync.
